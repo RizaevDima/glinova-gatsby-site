@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import parse from "html-react-parser"
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../components/Layout/Layout"
 import Seo from "../components/seo"
 
 const BlogIndex = ({
@@ -11,7 +11,7 @@ const BlogIndex = ({
   pageContext: { nextPagePath, previousPagePath },
 }) => {
   const posts = data.allWpPost.nodes
-
+  console.log("post ---> archive", posts)
   if (!posts.length) {
     return (
       <Layout isHomePage>
@@ -71,7 +71,7 @@ const BlogIndex = ({
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {
+  query WordPressPostArchive($offset: Int, $postsPerPage: Int) {
     allWpPost(
       sort: { fields: [date], order: DESC }
       limit: $postsPerPage

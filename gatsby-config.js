@@ -7,6 +7,7 @@
  */
 
 module.exports = {
+  pathPrefix: `/glinova.ua`,
   /**
    * Adding plugins to this array adds them to your Gatsby site.
    *
@@ -28,7 +29,10 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://wpgatsbydemo.wpengine.com/graphql`,
+          // `https://wpgatsbydemo.wpengine.com/graphql`,
+          // `http://local-test-getsby.no/graphql`,
+          `https://devtemp.no/glinova.ua/site-admin/graphql`,
+        useACF: true,
       },
     },
 
@@ -51,8 +55,25 @@ module.exports = {
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-up-gatsby-image
      * if you're curious about it.
      */
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          // formats: [`auto`, `webp`],
+          // placeholder: `dominantColor`,
+          quality: 100,
+          // breakpoints: [750, 1080, 1366, 1920],
+          // backgroundColor: `transparent`,
+          // tracedSVGOptions: {},
+          // blurredOptions: {},
+          // jpgOptions: {},
+          // pngOptions: {},
+          // webpOptions: {},
+          // avifOptions: {},
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
@@ -70,7 +91,7 @@ module.exports = {
 
     // See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet
     `gatsby-plugin-react-helmet`,
-
+    `gatsby-plugin-styled-components`,
     /**
      * this (optional) plugin enables Progressive Web App + Offline functionality
      * To learn more, visit: https://gatsby.dev/offline

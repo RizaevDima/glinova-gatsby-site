@@ -1,6 +1,19 @@
 const path = require(`path`)
 const chunk = require(`lodash/chunk`)
-
+// exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+//   if (stage === "build-html" || stage === "develop-html") {
+//     actions.setWebpackConfig({
+//       module: {
+//         rules: [
+//           {
+//             test: /home/,
+//             use: loaders.null(),
+//           },
+//         ],
+//       },
+//     })
+//   }
+// }
 // This is a simple debugging tool
 // dd() will prettily dump to the terminal and kill the process
 // const { dd } = require(`dumper.js`)
@@ -14,17 +27,24 @@ const chunk = require(`lodash/chunk`)
 exports.createPages = async gatsbyUtilities => {
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities)
-
+  const pages = await getSitePages(gatsbyUtilities)
+  // console.log(`gatsbyUtilities`, gatsbyUtilities)
   // If there are no posts in WordPress, don't do anything
   if (!posts.length) {
     return
   }
+  if (!pages.length) {
+    return
+  }
 
   // If there are posts, create pages for them
-  await createIndividualBlogPostPages({ posts, gatsbyUtilities })
+  // await createIndividualBlogPostPages({ posts, gatsbyUtilities })
 
   // And a paginated archive
-  await createBlogPostArchive({ posts, gatsbyUtilities })
+  // await createBlogPostArchive({ posts, gatsbyUtilities })
+
+  // If there are page, create pages for them
+  await createBlogSitePages({ pages, gatsbyUtilities })
 }
 
 /**
@@ -88,7 +108,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           // we want the first page to be "/" and any additional pages
           // to be numbered.
           // "/blog/2" for example
-          return page === 1 ? `/` : `/blog/${page}`
+          return page === 1 ? `/blog/` : `/blog/${page}`
         }
 
         return null
@@ -115,6 +135,37 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
           nextPagePath: getPagePath(pageNumber + 1),
           previousPagePath: getPagePath(pageNumber - 1),
+        },
+      })
+    })
+  )
+}
+
+async function createBlogSitePages({ pages, gatsbyUtilities }) {
+  return Promise.all(
+    pages.map(({ page }) => {
+      let pagePath = page.isFrontPage ? "/" : page.uri
+      let pageComponent = page.isFrontPage
+        ? path.resolve(`./src/templates/home.js`)
+        : path.resolve(`./src/pages/page.js`)
+      // createPage is an action passed to createPages
+      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+      return gatsbyUtilities.actions.createPage({
+        // Use the WordPress uri as the Gatsby page path
+        // This is a good idea so that internal links and menus work 👍
+        path: pagePath,
+
+        // use the blog post template as the page component
+        component: pageComponent,
+
+        // `context` is available in the template as a prop and
+        // as a variable in GraphQL.
+        context: {
+          // we need to add the post id here
+          // so our blog post template knows which blog post
+          // the current page is (when you open it in a browser)
+          id: page.id,
+          title: page.title,
         },
       })
     })
@@ -163,4 +214,31 @@ async function getPosts({ graphql, reporter }) {
   }
 
   return graphqlResult.data.allWpPost.edges
+}
+async function getSitePages({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query WpPages {
+      # Query all WordPress blog posts sorted by date
+      allWpPage(sort: { fields: [date], order: DESC }) {
+        edges {
+          page: node {
+            id
+            uri
+            isFrontPage
+            title
+          }
+        }
+      }
+    }
+  `)
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      graphqlResult.errors
+    )
+    return
+  }
+
+  return graphqlResult.data.allWpPage.edges
 }
