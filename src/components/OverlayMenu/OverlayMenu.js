@@ -11,7 +11,7 @@ const OverlayMenu = ({ menuOpen, callback }) => {
   return (
     <Overlay menuOpen={menuOpen}>
       <div className="inner">
-        <img className="invertedLogo" src={InvertedLogo} alt="white-logo" />
+        {/* <img className="invertedLogo" src={InvertedLogo} alt="white-logo" /> */}
         <ul className="overlayMenu">
           {menu.menuItems.nodes.map(item =>
             !item.parentId ? (

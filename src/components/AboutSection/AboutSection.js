@@ -63,6 +63,7 @@ const AboutSection = ({ aboutSectionData, bgSectionData }) => {
             alt="Професійна косметика тільки від офіційних представників"
           />
         </LogosWrapper>
+
         <BackgroundImage
           Tag="section"
           // Spread bgImage into BackgroundImage:
@@ -71,7 +72,7 @@ const AboutSection = ({ aboutSectionData, bgSectionData }) => {
           preserveStackingContext
         >
           <div
-            className="bg-section__content"
+            className="bg-section__content desc-ver"
             dangerouslySetInnerHTML={{
               __html: bgSectionData.content,
             }}
@@ -80,6 +81,12 @@ const AboutSection = ({ aboutSectionData, bgSectionData }) => {
             <GatsbyImage image={image} alt={"testimage"} />
           </div> */}
         </BackgroundImage>
+        <div
+          className="bg-section__content mobile-ver"
+          dangerouslySetInnerHTML={{
+            __html: bgSectionData.content,
+          }}
+        />
       </ContentWrapper>
     </section>
   )

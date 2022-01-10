@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Wrapper = styled.nav`
-  font-family: "Teko", Arial, Helvetica, sans-serif;
+  /* font-family: "Teko", Arial, Helvetica, sans-serif; */
   text-transform: uppercase;
   color: #212121;
   font-size: 1rem;
@@ -34,7 +34,7 @@ export const Wrapper = styled.nav`
       padding: 0 0 0 10px;
       transition: all 0.2s ease;
       text-decoration: none;
-      color: #000;
+      color: #fff;
 
       div {
         margin: -4px 0 0 5px;

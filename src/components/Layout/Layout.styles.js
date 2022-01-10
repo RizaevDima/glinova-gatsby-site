@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components"
 
 export const Primary = styled.main`
-  padding: 110px 0 0 0;
+  padding: 70px 0 0 0;
 `
 
 export const GlobalStyles = createGlobalStyle`
@@ -609,6 +609,18 @@ export const GlobalStyles = createGlobalStyle`
   pre tt:after {
     content: '';
   }
+  .mobile-ver {
+    display: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .mobile-ver {
+      display: block;
+    }
+    .desc-ver {
+      display:none;
+    }
+  }
   @media only screen and (max-width: 480px) {
     html {
       font-size: 100%;
@@ -618,20 +630,25 @@ export const GlobalStyles = createGlobalStyle`
 `
 export const ContentWrapper = styled.div`
   position: relative;
+  width: 100%;
   max-width: 1260px;
   margin: 30px auto 100px;
   padding: 0 15px;
   img {
     margin-bottom: 0px;
   }
+
   .about-bg-section {
     width: 100%;
     padding: 15px;
     min-height: 920px;
 
-    background-position: bottom center;
-    background-repeat: repeat-y;
-    background-size: cover;
+    @media only screen and (max-width: 1240px) {
+      width: auto;
+      margin: 0px -15px;
+      min-height: 360px;
+    }
+
     .bg-section__content {
       padding: 65px;
       width: 100%;
@@ -650,6 +667,10 @@ export const ContentWrapper = styled.div`
     .section__box-4 {
       padding: 0px 15px;
       width: 40%;
+      @media only screen and (max-width: 768px) {
+        margin: 35px auto;
+        padding: 0px;
+      }
     }
     .section__box-5 {
       padding: 0px 15px;
@@ -667,6 +688,14 @@ export const ContentWrapper = styled.div`
   }
   .mt90 {
     margin-top: 90px;
+  }
+  @media only screen and (max-width: 768px) {
+    margin: 30px auto 55px;
+    .section__box .section__box-4,
+    .section__box .section__box-5,
+    .section__box .section__box-6 {
+      width: 100%;
+    }
   }
 `
 export const FullWidthContainer = styled.div`
@@ -691,10 +720,26 @@ export const FullWidthContainer = styled.div`
     margin: 0px;
     font-weight: 600;
   }
+  @media only screen and (max-width: 768px) {
+    h2 {
+      font-size: 40px;
+      line-height: 38px;
+      margin-bottom: 15px;
+    }
+    h4 {
+      font-size: 26px;
+      line-height: 28px;
+    }
+  }
 `
 export const LogosWrapper = styled.div`
   border: 5px solid #cecece;
   padding: 35px;
   margin-top: 55px;
   margin-bottom: 100px;
+  @media only screen and (max-width: 768px) {
+    padding: 12px;
+    margin-top: 55px;
+    margin-bottom: 55px;
+  }
 `

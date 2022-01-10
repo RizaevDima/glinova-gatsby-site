@@ -13,15 +13,35 @@ export const ContactWraper = styled.div`
     .contact-section__box-image {
       padding: 0px 15px;
       width: 45%;
+      /* @media only screen and (max-width: 768px) {
+        padding: 0px;
+        width: 100%;
+      } */
     }
     .contact-section__box-content {
       padding: 0px 15px;
       margin: 80px 0px 0px;
       width: 55%;
+
       h2 {
         font-size: 38px;
         text-align: center;
       }
+      /* @media only screen and (max-width: 768px) {
+        width: 100%;
+        margin-top: 15px;
+      } */
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 50px;
+    .section__box .contact-section__box-image {
+      padding: 0px;
+      width: 100%;
+    }
+    .section__box .contact-section__box-content {
+      width: 100%;
+      margin-top: 15px;
     }
   }
 `
@@ -49,6 +69,12 @@ export const ContactFormWrapper = styled.div`
   .sign-field-submit {
     display: flex;
     justify-content: flex-end;
+  }
+  @media only screen and (max-width: 768px) {
+    margin: 35px 0px;
+    .sign-field-submit {
+      justify-content: center;
+    }
   }
 `
 export const BtnWraperPink = styled.button`

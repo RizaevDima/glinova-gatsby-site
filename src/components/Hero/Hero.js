@@ -2,7 +2,12 @@ import React from "react"
 import { getImage } from "gatsby-plugin-image"
 import BlueBtn from "../Buttons/BlueBtn"
 // import { useHeroQuery } from "../../hooks/useHeroQuery"
-import { Wrapper, HeaderWrapper, StyledImg } from "./Hero.styles"
+import {
+  Wrapper,
+  HeaderWrapper,
+  StyledImg,
+  MobileHeaderContent,
+} from "./Hero.styles"
 
 const Hero = ({ homeHeaderData }) => {
   // const {
@@ -16,6 +21,10 @@ const Hero = ({ homeHeaderData }) => {
   return (
     <Wrapper>
       <StyledImg image={imageData} alt="Hero Image" />
+      <MobileHeaderContent>
+        <h2>Лікар-косметолог</h2>
+        <h1>Юлія Глінова</h1>
+      </MobileHeaderContent>
       <HeaderWrapper>
         <div className="header-section__block">
           <div
@@ -27,6 +36,7 @@ const Hero = ({ homeHeaderData }) => {
           </div>
         </div>
       </HeaderWrapper>
+      {/* <MobileHeaderContent></MobileHeaderContent> */}
     </Wrapper>
   )
 }

@@ -8,6 +8,7 @@ import styled from "styled-components"
 
 export const ServicesSection = styled.div`
   position: relative;
+  width: 100%;
   max-width: 1260px;
   margin: 0 auto;
   padding: 0 15px;
@@ -32,6 +33,19 @@ export const ServicesSection = styled.div`
     .services-section__box-image {
       padding: 0px 15px;
       width: 60%;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    margin: 30px auto 55px;
+    .services-section__box {
+      flex-direction: column-reverse;
+      .services-section__box-content {
+        width: 100%;
+      }
+      .services-section__box-image {
+        width: 100%;
+        padding: 0px;
+      }
     }
   }
 `

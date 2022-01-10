@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const HamburgerButton = styled.div`
   img {
@@ -6,9 +6,10 @@ export const HamburgerButton = styled.div`
     display: block;
     z-index: 100000;
     right: 30px;
-    top: 35px;
-    width: 40px;
-    height: 40px;
+    top: 18px;
+    width: 35px;
+    margin-bottom: 0px;
+    height: 35px;
     cursor: pointer;
     transition: all 0.2s ease;
 
@@ -20,4 +21,4 @@ export const HamburgerButton = styled.div`
       display: none;
     }
   }
-`;
+`

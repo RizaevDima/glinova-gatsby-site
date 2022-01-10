@@ -14,7 +14,9 @@ const Header = () => {
     <Wrapper>
       <Content>
         <Navigation menu={menu.menuItems.nodes} />
-        <a href={`tel:${sitePhoneNumber}`}>{"тел. " + sitePhoneNumber}</a>
+        <a href={`tel:${sitePhoneNumber}`} className="header-phone-link">
+          {"тел. " + sitePhoneNumber}
+        </a>
       </Content>
     </Wrapper>
   )
